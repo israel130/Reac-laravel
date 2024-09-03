@@ -11,6 +11,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         document.getElementById('background')?.classList.add('!hidden');
     };
 
+    const items = [
+        {
+           id:1, prenda: 'pantalon',Precio: '45',Talla: 'XL',Color: 'Beige', Tela: 'Algodón', img:'pantalon.png'
+        },
+        {
+           id:2, prenda: 'camisa',Precio: '350',Talla: 'L',Color: 'Azul', Tela: 'Poliéster', img:'camisa.png'
+        }
+    ]
+
     return (
         <>
             <Head title="Inicio" />
@@ -65,88 +74,49 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                         <main className="mt-6">
                             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                               
-                            <div className="border p-4 rounded-lg shadow-md">
-                                <img 
-                                    src="/img/pantalon.png" 
-                                    alt="Pantalón" 
-                                    className="w-full max-h-48 object-contain rounded-lg mb-4"
-                                />
-                                <h2 className="text-xl font-bold mb-2 text-white">Pantalón</h2>
-                                <p className="text-white mb-4">Descripción breve del pantalón.</p>
-                                <div className='col-12 row'>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Precio:</h4>
-                                        <span className="text-white font-bold">$45</span>
+
+                            {items.map(item => (
+                                <div className="border p-4 rounded-lg shadow-md" key={item.id}>
+                                    <img 
+                                        src={`/img/${item.img}`} 
+                                        alt={item.prenda} 
+                                        className="w-full max-h-48 object-contain rounded-lg mb-4"
+                                    />
+                                    <h2 className="text-xl font-bold mb-2 text-white">{item.prenda.charAt(0).toUpperCase() + item.prenda.slice(1)}</h2>
+                                    <p className="text-white mb-4">Descripción breve del {item.prenda}.</p>
+                                    <div className='col-12 row'>
+                                        <div className="mb-2 col-2">
+                                            <h4 className="text-white">Precio:</h4>
+                                            <span className="text-white font-bold">${item.Precio}</span>
+                                        </div>
+                                        <div className="mb-2 col-2">
+                                            <h4 className="text-white">Talla:</h4>
+                                            <span className="text-white font-bold">{item.Talla}</span>
+                                        </div>
+                                        <div className="mb-2 col-2">
+                                            <h4 className="text-white">Color:</h4>
+                                            <span className="text-white font-bold">{item.Color}</span>
+                                        </div>
+                                        <div className="mb-3 col-2">
+                                            <h4 className="text-white">Tela:</h4>
+                                            <span className="text-white font-bold">{item.Tela}</span>
+                                        </div>
                                     </div>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Talla:</h4>
-                                        <span className="text-white font-bold">XL</span>
-                                    </div>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Color:</h4>
-                                        <span className="text-white font-bold">Beige</span>
-                                    </div>
-                                    <div className="mb-3 col-2">
-                                        <h4 className="text-white">Tela:</h4>
-                                        <span className="text-white font-bold">Algodón</span>
-                                    </div>
+                                    <Link
+                                        href={ route('comprar', { 
+                                            prenda: item.prenda,
+                                            Precio: item.Precio,
+                                            Talla: item.Talla,
+                                            Color: item.Color,
+                                            Tela: item.Tela
+                                        })}
+                                        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                                    >
+                                        Comprar
+                                    </Link>
                                 </div>
-                                <Link
-                                    href={ route('comprar', { 
-                                        prenda: 'pantalon',
-                                        Precio: '45',
-                                        Talla: 'XL',
-                                        Color: 'Beige',
-                                        Tela: 'Algodón'
-                                    })}
-                                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-                                >
-                                    Comprar
-                                </Link>
-                            </div>
-                                
-                                
-                            <div className="border p-4 rounded-lg shadow-md">
-                                <img 
-                                    src="/img/camisa.png" 
-                                    alt="Camisa" 
-                                    className="w-full max-h-48 object-contain rounded-lg mb-4"
-                                />
-                                <h2 className="text-xl font-bold mb-2 text-white">Camisa</h2>
-                                <p className="text-white mb-4">Descripción breve de la camisa.</p>
-                                <div className='col-12 row'>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Precio:</h4>
-                                        <span className="text-white font-bold">$350</span> 
-                                    </div>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Talla:</h4>
-                                        <span className="text-white font-bold">L</span> 
-                                    </div>
-                                    <div className="mb-2 col-2">
-                                        <h4 className="text-white">Color:</h4>
-                                        <span className="text-white font-bold">Azul</span> 
-                                    </div>
-                                    <div className="mb-3 col-2">
-                                        <h4 className="text-white">Tela:</h4>
-                                        <span className="text-white font-bold">Poliéster</span> 
-                                    </div>
-                                </div>
-                                <Link
-                                    href={route('comprar', { 
-                                        prenda: 'camisa', 
-                                        Precio: '350',       
-                                        Talla: 'L',        
-                                        Color: 'Azul',     
-                                        Tela: 'Poliéster' 
-                                    })}
-                                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-                                >
-                                    Comprar
-                                </Link>
-                            </div>
-                                
+                            ))}
+
                             </div>
                         </main>
 
